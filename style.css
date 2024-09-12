@@ -1,0 +1,110 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  text-align: center;
+  font-family: "Pinyon Script", cursive;
+  font-weight: 400;
+  font-size: 60px;
+  text-shadow: 3px 3px 3px black;
+}
+
+/* Navbar */
+.navbar {
+  color: rgb(3, 3, 3);
+  display: flex;
+  justify-content: center; /* Centers the navbar */
+  align-items: center; /* Vertically aligns the items */
+  padding: 10px 20px;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 80px; /* Adjust space between links */
+  margin: 0;
+}
+
+.nav-links li {
+  display: inline;
+}
+
+.nav-links a {
+  color: rgb(0, 0, 0);
+  text-decoration: none;
+  font-size: 18px;
+  line-height: 40px; /* Ensure uniform height and alignment */
+}
+
+.nav-links a:hover {
+  color: #ddd;
+}
+
+.nav-links li:nth-child(2) a {
+  font-size: 30px; /* Larger font size for Gallery link */
+  font-weight: 300; /* Boldness */
+  color: rgb(223, 170, 27);
+  vertical-align: middle; /* Aligns "Gallery" vertically with other items */
+  line-height: 40px; /* Matches line-height for consistent vertical alignment */
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 60px;
+    right: 0;
+    width: 100%;
+    padding: 20px;
+  }
+
+  .nav-links li {
+    margin: 10px 0;
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
+}
+.background-image {
+  height: 50vh; /* Full viewport height */
+  width: 100%;
+  background-image: url("pngtree-elegant-and-contemporary-black-white-marble-texture-design-a-luxurious-seamless-image_13880378.png"); /* Use your image here */
+  background-size: cover; /* Ensures image covers the container without distortion */
+  background-position: center; /* Keeps the image centered */
+  background-repeat: no-repeat; /* Prevents tiling */
+  image-rendering: auto; /* Ensures the browser applies the best quality */
+}
+
+footer {
+  color: rgb(0, 0, 0);
+  padding: 20px 0;
+  text-align: center;
+}
+
+footer ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+footer li {
+  margin: 10px 0;
+}
+
+footer a {
+  color: rgb(0, 0, 0);
+  text-decoration: none;
+  font-size: 18px;
+}
+
+footer a:hover {
+  color: #ddd;
+}
+
+footer i {
+  margin-right: 10px;
+}

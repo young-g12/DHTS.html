@@ -1,0 +1,137 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+h1 {
+  text-align: center;
+  font-family: "Pinyon Script", cursive;
+  font-weight: 400;
+  font-size: 60px;
+  text-shadow: 3px 3px 3px black;
+}
+
+/* Navbar */
+.navbar {
+  color: rgb(3, 3, 3);
+  display: flex;
+  justify-content: center; /* Centers the navbar */
+  align-items: center; /* Vertically aligns the items */
+  padding: 10px 20px;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 80px; /* Adjust space between links */
+  margin: 0;
+}
+
+.nav-links li {
+  display: inline;
+}
+
+.nav-links a {
+  color: rgb(0, 0, 0);
+  text-decoration: none;
+  font-size: 18px;
+  line-height: 40px; /* Ensure uniform height and alignment */
+}
+
+.nav-links a:hover {
+  color: #ddd;
+}
+
+.gallery-link {
+  font-size: 30px; /* Larger font size for Gallery link */
+  font-weight: 300; /* Boldness */
+  color: rgb(223, 170, 27);
+  vertical-align: middle; /* Aligns "Gallery" vertically with other items */
+  line-height: 40px; /* Matches line-height for consistent vertical alignment */
+}
+
+/* Mobile Navbar */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 60px;
+    right: 0;
+    width: 100%;
+    padding: 20px;
+  }
+
+  .nav-links li {
+    margin: 10px 0;
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
+}
+
+/* Gallery */
+.gallery {
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.row {
+  display: flex;
+}
+
+.column {
+  flex: 33.33%;
+  padding: 5px;
+}
+
+.column img {
+  width: 100%;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.load-more {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.load-more i {
+  font-size: 40px;
+  cursor: pointer;
+  color: #000;
+}
+
+.load-more i:hover {
+  color: #777;
+}
+
+/* Footer */
+footer {
+  color: rgb(0, 0, 0);
+  padding: 20px 0;
+  text-align: center;
+}
+
+footer ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+footer a {
+  color: rgb(0, 0, 0);
+  text-decoration: none;
+  font-size: 18px;
+}
+
+footer a:hover {
+  color: #ddd;
+}
+
+footer i {
+  margin-right: 10px;
+}
