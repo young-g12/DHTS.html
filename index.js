@@ -39,12 +39,12 @@ document
 
 //Backend code
 
-ddocument.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", function () {
   const calendarEl = document.getElementById("calendar");
   const calendar = new FullCalendar.Calendar(calendarEl, {
     initialView: "dayGridMonth",
     events: function (fetchInfo, successCallback, failureCallback) {
-      fetch("http://localhost:3000/admin/appointments")
+      fetch("http://localhost:5500/admin/appointments")
         .then((response) => response.json())
         .then((data) => {
           const events = data.map((appointment) => ({

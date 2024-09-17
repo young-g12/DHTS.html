@@ -1,29 +1,31 @@
+require("dotenv").config(); // Import dotenv for environment variables
+
 const express = require("express");
-const bodyParser = require("body-parser");
 const nodemailer = require("nodemailer");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const session = require("express-session");
 
-const connectToMongoDB = require("mongodb://localhost:27017/bookingDB"); // Import MongoDB connection
-
 const app = express();
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 app.use(cors());
 app.use(
   session({
-    secret: "your_secret_key",
+    secret: process.env.SESSION_SECRET || "your_secret_key", // Use environment variable for secret
     resave: false,
     saveUninitialized: true,
   })
 );
 
 // Connect to MongoDB
-mongoose.connect("mongodb://localhost:27017/bookingDB", {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+mongoose
+  .connect("mongodb://localhost:27017/bookingDB", {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => console.log("Successfully connected to MongoDB"))
+  .catch((err) => console.error("Error connecting to MongoDB:", err));
 
 // Define booking schema
 const bookingSchema = new mongoose.Schema({
@@ -32,7 +34,7 @@ const bookingSchema = new mongoose.Schema({
   phone: String,
   date: String,
   time: String,
-  status: { type: String, default: "pending" }, // Add status for appointment approval
+  status: { type: String, default: "pending" },
 });
 
 const Booking = mongoose.model("Booking", bookingSchema);
@@ -41,8 +43,8 @@ const Booking = mongoose.model("Booking", bookingSchema);
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
-    user: "your_email@gmail.com",
-    pass: "your_password",
+    user: process.env.EMAIL_USER, // Use environment variables for credentials
+    pass: process.env.EMAIL_PASS,
   },
 });
 
@@ -58,13 +60,13 @@ app.post("/book-appointment", async (req, res) => {
 
   newBooking.save((err) => {
     if (err) {
-      res.send("Error saving booking");
+      res.status(500).send("Error saving booking");
     } else {
-      res.send("Booking saved successfully!");
+      res.status(200).send("Booking saved successfully!");
 
       // Send notification to your email
       const mailOptions = {
-        from: "your_email@gmail.com",
+        from: process.env.EMAIL_USER,
         to: "gmiranda540@yahoo.com",
         subject: "New Appointment Booking",
         text: `New appointment booked by ${req.body.name} on ${req.body.date} at ${req.body.time}. Contact: ${req.body.phone}`,
@@ -87,7 +89,7 @@ app.get("/admin/appointments", (req, res) => {
     if (err) {
       res.status(500).send("Error retrieving bookings");
     } else {
-      res.json(bookings);
+      res.status(200).json(bookings);
     }
   });
 });
@@ -101,7 +103,7 @@ app.put("/admin/appointments/:id", (req, res) => {
       if (err) {
         res.status(500).send("Error updating appointment");
       } else {
-        res.send("Appointment updated successfully");
+        res.status(200).send("Appointment updated successfully");
       }
     }
   );
@@ -113,12 +115,13 @@ app.delete("/admin/appointments/:id", (req, res) => {
     if (err) {
       res.status(500).send("Error deleting appointment");
     } else {
-      res.send("Appointment deleted successfully");
+      res.status(200).send("Appointment deleted successfully");
     }
   });
 });
 
 // Start the server
-app.listen(3000, () => {
-  console.log("Server is running on port 3000");
+const PORT = process.env.PORT || 5500;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });
