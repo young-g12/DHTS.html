@@ -12,6 +12,6 @@ third page client is able to book appointments
 
 # Back-end 
 Gives admin access
-SEnds booking information to admin either by email or text and stores information in mongoDB
+Sends booking information to admin either by email or text and stores information in mongoDB
 
 
